@@ -7,20 +7,20 @@ import { createAdminClient } from "@/lib/supabase/admin";
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const body = await request.json();
-    const api_key = request.headers.get("x-api-key");
+    const x_api_key = request.headers.get("x-api-key");
 
-    if (!api_key) {
+    if (!x_api_key) {
       throw new UnauthorizedError("Missing API key");
     }
 
-    const project_id = await verifyApiKey(api_key, true);
-    if (!project_id) {
+    const api_key = await verifyApiKey(x_api_key, true);
+    if (!api_key) {
       throw new UnauthorizedError("Invalid API key");
     }
 
     const supabase = createAdminClient();
     const { error } = await supabase.from("logs").insert({
-      project_id,
+      project_id: api_key.project_id,
       timestamp: body.timestamp,
       level: body.level,
       service: body.service,

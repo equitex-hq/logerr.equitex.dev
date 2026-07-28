@@ -3,6 +3,7 @@ import "server-only";
 import { createHash } from "crypto";
 
 import { createAdminClient } from "@/lib/supabase/admin";
+import { apiKeySchema, type ApiKey } from "@/schemas/api-key";
 
 /**
  * Hashes API key using SHA-256.
@@ -17,18 +18,18 @@ export function hashApiKey(api_key: string): string {
  * Verifies if the API key is valid.
  * @param api_key API key to be validated
  * @param is_secret Whether the API key is secret or not (`false` default)
- * @returns Project ID associated with the API key if valid, otherwise `null`
+ * @returns API key object if valid, otherwise `null`
  */
 export async function verifyApiKey(
   api_key: string,
   is_secret: boolean = false,
-): Promise<string | null> {
+): Promise<ApiKey | null> {
   const token = is_secret ? hashApiKey(api_key) : api_key;
 
   const supabase = createAdminClient();
   const { data, error } = await supabase
     .from("api_keys")
-    .select("project_id")
+    .select("*")
     .eq("token", token)
     .maybeSingle();
 
@@ -36,5 +37,12 @@ export async function verifyApiKey(
     throw new Error("Failed to validate API key", { cause: error });
   }
 
-  return data?.project_id ? data.project_id : null;
+  if (!data) return null;
+
+  const parsed = apiKeySchema.safeParse(data);
+  if (!parsed.success) {
+    throw new Error("Invalid API key data");
+  }
+
+  return parsed.data;
 }
