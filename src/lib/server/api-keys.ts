@@ -31,6 +31,9 @@ export async function verifyApiKey(
     .from("api_keys")
     .select("*")
     .eq("token", token)
+    .eq("is_active", true)
+    .is("revoked_at", null)
+    .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`)
     .maybeSingle();
 
   if (error) {
