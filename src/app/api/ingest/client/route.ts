@@ -39,7 +39,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const origin = request.headers.get("origin");
     const x_api_key = request.headers.get("x-api-key");
-    const body = await request.json();
 
     if (!origin) {
       throw new ForbiddenError("Missing Origin header");
@@ -60,6 +59,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       throw new ForbiddenError("Origin not allowed for this API key");
     }
 
+    const body = await request.json();
     const { error } = await supabase.from("logs").insert({
       project_id: api_key.project_id,
       timestamp: body.timestamp,

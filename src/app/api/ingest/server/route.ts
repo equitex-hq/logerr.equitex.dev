@@ -6,7 +6,6 @@ import { createAdminClient } from "@/lib/supabase/admin";
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    const body = await request.json();
     const x_api_key = request.headers.get("x-api-key");
 
     if (!x_api_key) {
@@ -18,6 +17,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       throw new UnauthorizedError("Invalid API key");
     }
 
+    const body = await request.json();
     const supabase = createAdminClient();
     const { error } = await supabase.from("logs").insert({
       project_id: api_key.project_id,
