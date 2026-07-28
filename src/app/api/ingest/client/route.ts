@@ -76,7 +76,16 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       });
     }
 
-    return NextResponse.json({ success: true }, { status: 200 });
+    return NextResponse.json(
+      { success: true },
+      {
+        status: 200,
+        headers: {
+          "Access-Control-Allow-Origin": origin,
+          Vary: "Origin",
+        },
+      },
+    );
   } catch (error) {
     // Unauthorized Error
     if (error instanceof UnauthorizedError) {
