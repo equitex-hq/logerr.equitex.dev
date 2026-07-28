@@ -47,9 +47,18 @@ export async function isOriginAllowed(
   origin: string,
   api_key_id?: string,
 ): Promise<boolean> {
-  const allowed_origins = (await getAllowedOrigins(supabase, api_key_id)).map(
-    (o) => o.origin,
-  );
+  const query = supabase
+    .from("allowed_origins")
+    .select("id")
+    .eq("origin", origin);
 
-  return allowed_origins.includes(origin);
+  if (api_key_id) query.eq("api_key_id", api_key_id);
+
+  const { data, error } = await query.limit(1).maybeSingle();
+
+  if (error) {
+    throw new Error("Failed to check allowed origin");
+  }
+
+  return !!data;
 }
