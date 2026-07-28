@@ -1,0 +1,86 @@
+### Correct request
+POST http://localhost:3000/api/ingest/client
+Origin: https://logerr.equitex.dev
+Content-Type: application/json
+x-api-key: {VALID_API_KEY}
+
+{
+  "timestamp": "2026-08-01T12:00:00Z",
+  "level": "error",
+  "service": "my-service",
+  "message": "An error occurred",
+  "environment": "production",
+  "metadata": {
+    "userId": "67890",
+    "sessionId": "abcde"
+  }
+}
+
+### Missing Origin header
+POST http://localhost:3000/api/ingest/client
+Content-Type: application/json
+
+{
+  "timestamp": "2026-08-01T12:00:00Z",
+  "level": "error",
+  "service": "my-service",
+  "message": "An error occurred",
+  "environment": "production",
+  "metadata": {
+    "userId": "67890",
+    "sessionId": "abcde"
+  }
+}
+
+### Missing API key
+POST http://localhost:3000/api/ingest/client
+Origin: https://logerr.equitex.dev
+Content-Type: application/json
+
+{
+  "timestamp": "2026-08-01T12:00:00Z",
+  "level": "error",
+  "service": "my-service",
+  "message": "An error occurred",
+  "environment": "production",
+  "metadata": {
+    "userId": "67890",
+    "sessionId": "abcde"
+  }
+}
+
+### Invalid API key
+POST http://localhost:3000/api/ingest/client
+Origin: https://logerr.equitex.dev
+Content-Type: application/json
+x-api-key: invalid_key
+
+{
+  "timestamp": "2026-08-01T12:00:00Z",
+  "level": "error",
+  "service": "my-service",
+  "message": "An error occurred",
+  "environment": "production",
+  "metadata": {
+    "userId": "67890",
+    "sessionId": "abcde"
+  }
+}
+
+### Origin not allowed for this API key
+POST http://localhost:3000/api/ingest/client
+Origin: invalid_origin
+Content-Type: application/json
+x-api-key: {VALID_API_KEY}
+
+{
+  "timestamp": "2026-08-01T12:00:00Z",
+  "level": "error",
+  "service": "my-service",
+  "message": "An error occurred",
+  "environment": "production",
+  "metadata": {
+    "userId": "67890",
+    "sessionId": "abcde"
+  }
+}
