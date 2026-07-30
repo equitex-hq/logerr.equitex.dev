@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaBars, FaXmark } from "react-icons/fa6";
 
 import Button from "@/components/ui/Button";
@@ -13,6 +13,18 @@ export default function Navbar() {
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
   };
+
+  // Escape key handler
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const handleEscape = (e: { key: string }) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [isMenuOpen]);
 
   return (
     <header className="sticky z-(--z-sticky) top-0">
