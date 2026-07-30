@@ -108,7 +108,7 @@ export default function Navbar() {
                 </Button>
               </div>
               <div className="grow overflow-y-auto">
-                <ul className="flex flex-col gap-2 p-4">
+                <ul className="flex flex-col gap-2 p-2 md:p-4">
                   <li>
                     <Link
                       href="/docs"
