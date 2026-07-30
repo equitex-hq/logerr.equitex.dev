@@ -10,9 +10,9 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "text-fg bg-(--bg) hover:bg-(--bg-light)",
+        default: "text-fg bg-btn hover:bg-btn-hover",
         primary:
-          "text-(--neutral-100) dark:text-(--neutral-900) bg-(--neutral-950) dark:bg-(--neutral-50) hover:bg-(--neutral-900) dark:hover:bg-(--white)",
+          "border-none text-btn bg-fg hover:bg-(--neutral-800) dark:hover:bg-(--neutral-200)",
       },
       size: {
         xs: "px-2 py-1 rounded-md text-xs",
