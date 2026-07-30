@@ -75,7 +75,11 @@ export default function Navbar() {
           </Button>
 
           {isMenuOpen && (
-            <div className="fixed inset-0 lg:hidden flex flex-col overflow-hidden bg-(--bg)">
+            <div
+              className="fixed inset-0 lg:hidden flex flex-col overflow-hidden bg-(--bg)"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Navigation menu">
               <div className="flex items-center justify-between gap-16 p-4 md:px-8 border-b border-(--border)">
                 <div className="flex items-center space-x-3">
                   <Link
