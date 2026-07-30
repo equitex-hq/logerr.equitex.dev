@@ -68,8 +68,7 @@ export default function Navbar() {
           </div>
           <Button
             onClick={toggleMenu}
-            aria-label=""
-            variant="default"
+            aria-label="Open menu"
             layout="icon-only"
             className="lg:hidden -mr-2 border-none bg-transparent">
             <FaBars aria-hidden="true" />
@@ -102,9 +101,10 @@ export default function Navbar() {
                 </div>
                 <Button
                   onClick={toggleMenu}
+                  aria-label="Close menu"
                   layout="icon-only"
                   className="-mr-2 border-none bg-transparent">
-                  <FaXmark />
+                  <FaXmark aria-hidden="true" />
                 </Button>
               </div>
               <div className="grow overflow-y-auto">
