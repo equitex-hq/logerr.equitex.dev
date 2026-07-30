@@ -26,6 +26,14 @@ export default function Navbar() {
     return () => document.removeEventListener("keydown", handleEscape);
   }, [isMenuOpen]);
 
+  // Scroll lock
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  });
+
   return (
     <header className="sticky z-(--z-sticky) top-0">
       <nav className="border-b border-(--border) bg-(--bg)">
