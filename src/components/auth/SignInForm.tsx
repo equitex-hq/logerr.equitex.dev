@@ -12,7 +12,7 @@ interface Inputs {
   password: string;
 }
 
-export default function LoginForm() {
+export default function SignInForm() {
   const router = useRouter();
 
   const {
@@ -44,47 +44,74 @@ export default function LoginForm() {
 
   return (
     <div className="card max-w-lg pb-4 rounded-3xl shadow">
-      <h1 className="mb-3 font-heading font-bold text-3xl">Log In</h1>
+      <h1 className="mb-3 font-heading font-bold text-3xl">Sign in</h1>
       <p className="mb-8 text-fg-muted text-sm">
         Enter your email and password to access your account
       </p>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col w-full">
+        className="flex flex-col w-full"
+        noValidate>
         <div className="flex flex-col gap-1 mb-4">
-          <label className="font-heading font-medium text-lg">Email</label>
+          <label
+            htmlFor="email"
+            className="font-heading font-medium text-lg">
+            Email
+          </label>
           <input
+            id="email"
             className="input-field"
             type="email"
+            autoComplete="email"
+            aria-invalid={errors.email ? "true" : "false"}
+            aria-describedby={errors.email ? "email-error" : undefined}
             {...register("email", {
               required: "Email address is required",
             })}
           />
           {errors.email?.message && (
-            <p className="text-xs text-red-500">{errors.email.message}</p>
+            <p
+              id="email-error"
+              className="text-xs text-red-500">
+              {errors.email.message}
+            </p>
           )}
         </div>
         <div className="flex flex-col gap-1 mb-4">
-          <label className="font-heading font-medium text-lg">Password</label>
+          <label
+            htmlFor="password"
+            className="font-heading font-medium text-lg">
+            Password
+          </label>
           <input
+            id="password"
             className="input-field"
             type="password"
+            autoComplete="current-password"
+            aria-invalid={errors.password ? "true" : "false"}
+            aria-describedby={errors.password ? "password-error" : undefined}
             {...register("password", { required: "Password is required" })}
           />
           {errors.password?.message && (
-            <p className="text-xs text-red-500">{errors.password.message}</p>
+            <p
+              id="password-error"
+              className="text-xs text-red-500">
+              {errors.password.message}
+            </p>
           )}
         </div>
         {errors.root?.auth && (
-          <p className="text-center text-sm text-red-500 mb-4">
-            {errors.root?.auth?.message}
+          <p
+            role="alert"
+            className="text-center text-sm text-red-500 mb-4">
+            {errors.root.auth.message}
           </p>
         )}
         <Button
           type="submit"
           disabled={isSubmitting}
           variant="primary">
-          Submit
+          {isSubmitting ? "Signing in..." : "Sign in"}
         </Button>
       </form>
     </div>
