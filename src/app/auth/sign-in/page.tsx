@@ -1,6 +1,10 @@
 import SignInForm from "@/components/auth/SignInForm";
 import Section from "@/components/ui/Section";
 
+export const metadata = {
+  title: "Sign In",
+};
+
 export default function Page() {
   return (
     <main>
