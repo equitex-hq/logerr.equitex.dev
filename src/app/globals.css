@@ -63,6 +63,25 @@
   }
 }
 
+@layer components {
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 32px 16px;
+    border-radius: 8px;
+    background-color: var(--bg);
+  }
+
+  .input-field {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline-offset: 2px;
+  }
+}
+
 body {
   background: var(--bg-dark);
   color: var(--fg);
