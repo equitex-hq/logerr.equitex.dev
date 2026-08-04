@@ -7,7 +7,11 @@ import { FaBars, FaXmark } from "react-icons/fa6";
 
 import Button from "@/components/ui/Button";
 
-export default function NavbarMenu() {
+export default function NavbarMenu({
+  isAuthenticated,
+}: {
+  isAuthenticated: boolean;
+}) {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -100,9 +104,9 @@ export default function NavbarMenu() {
           </div>
           <div className="p-4 border-t border-(--border)">
             <Link
-              href="/dashboard"
+              href={isAuthenticated ? "/dashboard" : "/auth/sign-in"}
               className="block px-4 py-2 rounded-lg text-btn text-center bg-fg hover:bg-(--neutral-800) dark:hover:bg-(--neutral-200) transition duration-300">
-              Dashboard
+              {isAuthenticated ? "Dashboard" : "Sign in"}
             </Link>
           </div>
         </div>

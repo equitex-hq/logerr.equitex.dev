@@ -1,9 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { createClient } from "@/lib/supabase/server";
+
 import NavbarMenu from "@/components/common/NavbarMenu";
 
-export default function Navbar() {
+export default async function Navbar() {
+  const supabase = await createClient();
+  const { data } = await supabase.auth.getClaims();
+  const isAuthenticated = !!data?.claims;
+
   return (
     <header className="sticky z-(--z-sticky) top-0">
       <nav className="border-b border-(--border) bg-(--bg)">
@@ -48,15 +54,28 @@ export default function Navbar() {
               </li>
             </ul>
           </div>
-          <div className="hidden lg:flex items-center gap-4">
-            <Link
-              href="/dashboard"
-              className="px-2 py-1 border border-(--border) rounded-md text-xs bg-(--bg-light) transition-shadow duration-300 hover:shadow">
-              Dashboard
-            </Link>
-            <div className="w-8 h-8 border border-(--border) rounded-full bg-(--bg-light)"></div>
-          </div>
-          <NavbarMenu />
+          {isAuthenticated && (
+            <div className="hidden lg:flex items-center gap-4">
+              <Link
+                href="/dashboard"
+                className="px-2 py-1 border border-(--border) rounded-md text-xs bg-(--bg-light) transition-shadow duration-300 hover:shadow">
+                Dashboard
+              </Link>
+              <div className="w-8 h-8 border border-(--border) rounded-full bg-(--bg-light)"></div>
+            </div>
+          )}
+
+          {!isAuthenticated && (
+            <div className="hidden lg:flex items-center gap-4">
+              <Link
+                href="/auth/sign-in"
+                className="px-2 py-1 border border-(--border) rounded-md text-xs bg-(--bg-light) transition-shadow duration-300 hover:shadow">
+                Sign in
+              </Link>
+            </div>
+          )}
+
+          <NavbarMenu isAuthenticated={isAuthenticated} />
         </div>
       </nav>
     </header>
