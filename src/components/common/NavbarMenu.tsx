@@ -32,7 +32,7 @@ export default function NavbarMenu() {
     return () => {
       document.body.style.overflow = "";
     };
-  });
+  }, [isMenuOpen]);
 
   return (
     <>
