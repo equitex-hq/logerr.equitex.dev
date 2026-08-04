@@ -60,7 +60,6 @@ export default function NavbarMenu() {
                   src="/logo-equitex.svg"
                   alt="Equitex Logo"
                   fill
-                  priority
                   className="dark:invert"
                 />
               </Link>
