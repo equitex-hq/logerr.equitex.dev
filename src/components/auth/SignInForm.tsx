@@ -34,7 +34,9 @@ export default function SignInForm() {
       });
 
       if (error) throw error;
+
       router.push("/dashboard");
+      router.refresh();
     } catch (error) {
       setError("root.auth", {
         message: error instanceof Error ? error.message : "An error occurred",
