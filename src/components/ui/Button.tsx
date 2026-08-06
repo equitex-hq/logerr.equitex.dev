@@ -4,7 +4,7 @@ import { cn } from "@/lib/shared/utils";
 
 const buttonVariants = cva(
   cn(
-    "border border-(--border) cursor-pointer transition",
+    "border border-(--border) cursor-pointer disabled:cursor-not-allowed transition",
     "outline-transparent outline-offset-2 focus-visible:outline-2 focus-visible:outline-blue-600 dark:focus-visible:outline-blue-500",
   ),
   {
