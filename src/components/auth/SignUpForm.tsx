@@ -70,8 +70,10 @@ export default function SignUpForm() {
 
   return (
     <div className="card max-w-lg pb-4 rounded-3xl shadow">
-      <h1 className="mb-3 font-heading font-bold text-3xl">Sign up</h1>
-      <p className="mb-8 text-fg-muted text-sm">
+      <h1 className="mb-3 font-heading font-bold text-3xl text-center">
+        Sign up
+      </h1>
+      <p className="mb-8 text-fg-muted text-sm text-center">
         Create an account to get started
       </p>
       <form
