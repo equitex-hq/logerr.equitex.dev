@@ -72,6 +72,7 @@ export default function NavbarMenu({
                 className="w-px h-8 bg-(--border)"></div>
               <Link
                 href="/"
+                onClick={toggleMenu}
                 className="font-heading font-medium text-2xl leading-none">
                 LogErr
               </Link>
@@ -89,6 +90,7 @@ export default function NavbarMenu({
               <li>
                 <Link
                   href="/docs"
+                  onClick={toggleMenu}
                   className="block px-4 py-2 rounded-lg hover:bg-btn-hover transition-colors">
                   Docs
                 </Link>
@@ -96,6 +98,7 @@ export default function NavbarMenu({
               <li>
                 <Link
                   href="/pricing"
+                  onClick={toggleMenu}
                   className="block px-4 py-2 rounded-lg hover:bg-btn-hover transition-colors">
                   Pricing
                 </Link>
@@ -106,6 +109,7 @@ export default function NavbarMenu({
             <div className="p-4 border-t border-(--border)">
               <Link
                 href="/dashboard"
+                onClick={toggleMenu}
                 className="block px-4 py-2 rounded-lg text-btn text-center bg-fg hover:bg-(--neutral-800) dark:hover:bg-(--neutral-200) transition duration-300">
                 Dashboard
               </Link>
@@ -116,11 +120,13 @@ export default function NavbarMenu({
             <div className="flex gap-2 p-4 border-t border-(--border)">
               <Link
                 href="/auth/sign-in"
+                onClick={toggleMenu}
                 className="block w-full px-4 py-2 rounded-lg text-btn text-center bg-fg hover:bg-(--neutral-800) dark:hover:bg-(--neutral-200) transition duration-300">
                 Sign in
               </Link>
               <Link
                 href="/auth/sign-up"
+                onClick={toggleMenu}
                 className="block w-full px-4 py-2 rounded-lg text-btn text-center bg-fg hover:bg-(--neutral-800) dark:hover:bg-(--neutral-200) transition duration-300">
                 Sign up
               </Link>
