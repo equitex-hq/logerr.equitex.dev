@@ -8,7 +8,7 @@ export const metadata = {
 export default function Page() {
   return (
     <main>
-      <Section className="min-h-dvh -mt-16.25 mb-0 pt-32">
+      <Section className="min-h-dvh -mt-16.25 mb-0 pt-32 pb-16">
         <SignUpForm />
       </Section>
     </main>
