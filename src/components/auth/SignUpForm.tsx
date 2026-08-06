@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { FaCheckCircle } from "react-icons/fa";
 
 import { HOST } from "@/config/shared";
 import { createClient } from "@/lib/supabase/client";
@@ -14,6 +16,8 @@ interface Inputs {
 }
 
 export default function SignUpForm() {
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+
   const {
     register,
     handleSubmit,
@@ -37,12 +41,32 @@ export default function SignUpForm() {
       });
 
       if (error) throw error;
+      setIsSubmitted(true);
     } catch (error) {
       setError("root.auth", {
         message: error instanceof Error ? error.message : "An error occurred",
       });
     }
   };
+
+  if (isSubmitted) {
+    return (
+      <div className="card max-w-lg rounded-3xl shadow">
+        <FaCheckCircle
+          aria-hidden="true"
+          className="h-20 w-20 mb-4 text-green-500"
+        />
+        <h1 className="mb-3 font-heading font-bold text-3xl text-center">
+          Check your email
+        </h1>
+        <p className="text-fg-muted text-center">
+          We sent a confirmation link to{" "}
+          <span className="font-medium text-fg">{getValues("email")}</span>.{" "}
+          <br /> Click it to finish signing up.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="card max-w-lg pb-4 rounded-3xl shadow">
