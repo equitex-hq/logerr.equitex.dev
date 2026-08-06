@@ -66,11 +66,16 @@ export default async function Navbar() {
           )}
 
           {!isAuthenticated && (
-            <div className="hidden lg:flex items-center gap-4">
+            <div className="hidden lg:flex items-center gap-2">
               <Link
                 href="/auth/sign-in"
                 className="px-2 py-1 border border-(--border) rounded-md text-xs bg-(--bg-light) transition-shadow duration-300 hover:shadow">
                 Sign in
+              </Link>
+              <Link
+                href="/auth/sign-up"
+                className="px-2 py-1 border border-(--border) rounded-md text-xs bg-(--bg-light) transition-shadow duration-300 hover:shadow">
+                Sign up
               </Link>
             </div>
           )}
