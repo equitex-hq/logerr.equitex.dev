@@ -102,13 +102,30 @@ export default function NavbarMenu({
               </li>
             </ul>
           </div>
-          <div className="p-4 border-t border-(--border)">
-            <Link
-              href={isAuthenticated ? "/dashboard" : "/auth/sign-in"}
-              className="block px-4 py-2 rounded-lg text-btn text-center bg-fg hover:bg-(--neutral-800) dark:hover:bg-(--neutral-200) transition duration-300">
-              {isAuthenticated ? "Dashboard" : "Sign in"}
-            </Link>
-          </div>
+          {isAuthenticated && (
+            <div className="p-4 border-t border-(--border)">
+              <Link
+                href="/dashboard"
+                className="block px-4 py-2 rounded-lg text-btn text-center bg-fg hover:bg-(--neutral-800) dark:hover:bg-(--neutral-200) transition duration-300">
+                Dashboard
+              </Link>
+            </div>
+          )}
+
+          {!isAuthenticated && (
+            <div className="flex gap-2 p-4 border-t border-(--border)">
+              <Link
+                href="/auth/sign-in"
+                className="block w-full px-4 py-2 rounded-lg text-btn text-center bg-fg hover:bg-(--neutral-800) dark:hover:bg-(--neutral-200) transition duration-300">
+                Sign in
+              </Link>
+              <Link
+                href="/auth/sign-up"
+                className="block w-full px-4 py-2 rounded-lg text-btn text-center bg-fg hover:bg-(--neutral-800) dark:hover:bg-(--neutral-200) transition duration-300">
+                Sign up
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </>
